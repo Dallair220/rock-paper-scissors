@@ -41,8 +41,15 @@ function playRound(pSelection, cSelection){
             return "Draw! Scissors tie scissors"
         }
     }
+
+    return "Error! Probably wrong user input.";
 }
 
-console.log(playRound("Rock", getComputerChoice()));
+function game(){
+    for(let i = 0; i < 5; i++){
+        userInput = prompt("Select Rock, Paper or Scissors!");
+        console.log(playRound(userInput, getComputerChoice()));
+    }
+}
 
-
+game();
