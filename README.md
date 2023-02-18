@@ -1,4 +1,4 @@
 # rock-paper-scissors
 Project: TOP
 
--> First JavaScript project to learn some concepts! 
+-> Reiterating to create a interactive UI using .js DOM manipulation
