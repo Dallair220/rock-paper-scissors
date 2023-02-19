@@ -11,45 +11,63 @@ function getComputerChoice(){
 }
 
 // p = player; c = computer
-function playRound(pSelection, cSelection){
+function playRound(pSelection){
+    cSelection = getComputerChoice();
+    var result = "";
+
     if(pSelection.toUpperCase() === 'ROCK'){
         if(cSelection === 'Rock'){
-            return "Draw! Rock ties rock";
+            result = "Draw! Rock ties rock";
         } else if (cSelection === 'Paper'){
-            return "You Lose! Paper beats rock"
+            result = "You Lose! Rock loses to paper"
         } else if(cSelection === 'Scissors'){
-            return "You Win! Rock beats scissors"
+            result = "You Win! Rock beats scissors"
         }
     }
 
     if(pSelection.toUpperCase() === 'PAPER'){
         if(cSelection === 'Rock'){
-            return "You Win! Paper beats rock";
+            result = "You Win! Paper beats rock";
         } else if (cSelection === 'Paper'){
-            return "Draw! Paper ties rock"
+            result = "Draw! Paper ties rock"
         } else if(cSelection === 'Scissors'){
-            return "You Lose! Scissors beats paper"
+            result = "You Lose! Paper loses to scissors"
         }
     }
 
     if(pSelection.toUpperCase() === 'SCISSORS'){
         if(cSelection === 'Rock'){
-            return "You Lose! Rock beats scissors";
+            result = "You Lose! Scissors loses to rock";
         } else if (cSelection === 'Paper'){
-            return "You Win! Scissors beats paper"
+            result = "You Win! Scissors beats paper"
         } else if(cSelection === 'Scissors'){
-            return "Draw! Scissors tie scissors"
+            result = "Draw! Scissors tie scissors"
         }
     }
 
-    return "Error! Probably wrong user input.";
+        return result;
 }
 
-function game(){
-    for(let i = 0; i < 5; i++){
-        userInput = prompt("Select Rock, Paper or Scissors!");
-        console.log(playRound(userInput, getComputerChoice()));
+function add(event){
+        const clickedButton = event.target.textContent;
+        printResults(clickedButton);
+}
+
+function printResults(clickedButton){
+    const resultsContainer = document.querySelector('.results');
+    const para = document.createElement('p');
+    
+    if(round < 5){
+        round++;
+        para.textContent = playRound(clickedButton);
+    } else {
+        para.textContent = "Already finished! Reload the site to play another 5 rounds.";
     }
+
+    resultsContainer.append(para);
 }
 
-game();
+const buttons = document.querySelectorAll('.select');
+buttons.forEach(button => button.addEventListener('click', add));
+
+var round = 0;
