@@ -20,32 +20,38 @@ function playRound(pSelection){
             result = "Draw! Rock ties rock";
         } else if (cSelection === 'Paper'){
             result = "You Lose! Rock loses to paper"
+            cScore++;
         } else if(cSelection === 'Scissors'){
             result = "You Win! Rock beats scissors"
+            pScore++;
         }
     }
 
     if(pSelection.toUpperCase() === 'PAPER'){
         if(cSelection === 'Rock'){
             result = "You Win! Paper beats rock";
+            pScore++;
         } else if (cSelection === 'Paper'){
             result = "Draw! Paper ties rock"
         } else if(cSelection === 'Scissors'){
             result = "You Lose! Paper loses to scissors"
+            cScore++;
         }
     }
 
     if(pSelection.toUpperCase() === 'SCISSORS'){
         if(cSelection === 'Rock'){
             result = "You Lose! Scissors loses to rock";
+            cScore++;
         } else if (cSelection === 'Paper'){
             result = "You Win! Scissors beats paper"
+            pScore++;
         } else if(cSelection === 'Scissors'){
             result = "Draw! Scissors tie scissors"
         }
     }
 
-        return result;
+        return result + ` || Current Score: Player = ${pScore} points - Computer = ${cScore}.`;
 }
 
 function add(event){
@@ -56,18 +62,23 @@ function add(event){
 function printResults(clickedButton){
     const resultsContainer = document.querySelector('.results');
     const para = document.createElement('p');
-    
-    if(round < 5){
-        round++;
-        para.textContent = playRound(clickedButton);
-    } else {
-        para.textContent = "Already finished! Reload the site to play another 5 rounds.";
-    }
-
+    play(para, clickedButton);
     resultsContainer.append(para);
+}
+
+function play(para, clickedButton){
+    if(cScore < 5 && pScore < 5){
+        para.textContent = playRound(clickedButton);
+    }
+    if(cScore === 5) {
+        para.textContent = "You Lost :( Reload the site to play another round.";
+    } else if (pScore === 5){
+        para.textContent = "You Won! <3"
+    }
 }
 
 const buttons = document.querySelectorAll('.select');
 buttons.forEach(button => button.addEventListener('click', add));
 
-var round = 0;
+var cScore = 0;
+var pScore = 0;
